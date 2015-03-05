@@ -27,4 +27,23 @@ namespace WeatherService.Tests
             get { return _subject; }
         }
     }
+
+    [TestClass]
+    public class WeatherServiceSimulatorTests : WeatherServiceTests
+    {
+        private readonly IWeatherService _subject = new WeatherServiceSimulator();
+
+        public override IWeatherService Subject
+        {
+            get { return _subject; }
+        }
+    }
+
+    class WeatherServiceSimulator : IWeatherService
+    {
+        public async Task<Weather> GetWeatherAsync(string location_)
+        {
+            return new Weather(new Location()) { Temperature = 300 };
+        }
+    }
 }
