@@ -9,10 +9,15 @@ namespace WeatherService.Tests
     {
         private readonly OpenweathermapWeatherService _subject = new OpenweathermapWeatherService();
 
+        public OpenweathermapWeatherService Subject
+        {
+            get { return _subject; }
+        }
+
         [TestMethod]
         public async Task TemperatureIsInExpectedRange()
         {
-            var result = await _subject.GetWeatherAsync("Seattle, WA");
+            var result = await Subject.GetWeatherAsync("Seattle, WA");
             // Roughly the hottest and coldest ever recorded, plus a margin
             Assert.IsTrue(result.Temperature > 150 && result.Temperature < 350);
         }
