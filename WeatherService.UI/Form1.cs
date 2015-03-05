@@ -13,7 +13,7 @@ namespace WeatherService.UI
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            var apiProxy = new ApiProxy();
+            var apiProxy = new OpenweathermapWeatherService();
             var weather = await apiProxy.MakeRequest();
 
             temperature.Text = weather.Temperature.ToString(CultureInfo.InvariantCulture);

@@ -21,9 +21,9 @@ namespace WeatherService
         public double Temperature { get; set; } 
     }
 
-    public class ApiProxy
+    public class OpenweathermapWeatherService
     {
-        public async Task<Weather> MakeRequest()
+        public async Task<Weather> GetWeatherAsync()
         {
             Weather weather = null;
             using (var client = new HttpClient())
