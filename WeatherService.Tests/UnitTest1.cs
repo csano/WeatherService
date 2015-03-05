@@ -6,7 +6,7 @@ namespace WeatherService.Tests
 {
     public abstract class WeatherServiceTests
     {
-        public abstract OpenweathermapWeatherService Subject { get; }
+        public abstract IWeatherService Subject { get; }
 
         [TestMethod]
         public async Task TemperatureIsInExpectedRange()
@@ -20,9 +20,9 @@ namespace WeatherService.Tests
     [TestClass]
     public class OpenweathermapWeatherServiceTests : WeatherServiceTests
     {
-        private readonly OpenweathermapWeatherService _subject = new OpenweathermapWeatherService();
+        private readonly IWeatherService _subject = new OpenweathermapWeatherService();
 
-        public override OpenweathermapWeatherService Subject
+        public override IWeatherService Subject
         {
             get { return _subject; }
         }
