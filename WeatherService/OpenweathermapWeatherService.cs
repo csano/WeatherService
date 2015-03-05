@@ -30,7 +30,8 @@ namespace WeatherService
             {
                 client.BaseAddress = new Uri("http://api.openweathermap.org/data/2.5/");
 
-                var response = await client.GetAsync("weather/?q=Seattle,WA&mode=xml");
+                var location_ = "Seattle,WA";
+                var response = await client.GetAsync(string.Format("weather/?q={0}&mode=xml", location_));
                 if (response.IsSuccessStatusCode)
                 {
                    var output = await response.Content.ReadAsStringAsync();
