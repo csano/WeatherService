@@ -14,7 +14,7 @@ namespace WeatherService.UI
         private async void button1_Click(object sender, EventArgs e)
         {
             var apiProxy = new OpenweathermapWeatherService();
-            var weather = await apiProxy.MakeRequest();
+            var weather = await apiProxy.GetWeatherAsync();
 
             temperature.Text = weather.Temperature.ToString(CultureInfo.InvariantCulture);
             location.Text = weather.Location.City;
