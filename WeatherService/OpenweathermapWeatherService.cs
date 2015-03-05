@@ -21,7 +21,12 @@ namespace WeatherService
         public double Temperature { get; set; } 
     }
 
-    public class OpenweathermapWeatherService
+    public interface IWeatherService
+    {
+        Task<Weather> GetWeatherAsync(string location_);
+    }
+
+    public class OpenweathermapWeatherService : IWeatherService
     {
         public async Task<Weather> GetWeatherAsync(string location_)
         {
