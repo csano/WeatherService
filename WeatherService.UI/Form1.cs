@@ -6,9 +6,9 @@ namespace WeatherService.UI
 {
     public partial class Form1 : Form
     {
-        private readonly OpenweathermapWeatherService _weatherService;
+        private readonly IWeatherService _weatherService;
 
-        public Form1(OpenweathermapWeatherService weatherService)
+        public Form1(IWeatherService weatherService)
         {
             InitializeComponent();
             _weatherService = weatherService;
