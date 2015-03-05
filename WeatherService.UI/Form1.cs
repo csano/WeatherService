@@ -8,10 +8,10 @@ namespace WeatherService.UI
     {
         private readonly OpenweathermapWeatherService _weatherService;
 
-        public Form1()
+        public Form1(OpenweathermapWeatherService weatherService)
         {
             InitializeComponent();
-            _weatherService = new OpenweathermapWeatherService();
+            _weatherService = weatherService;
         }
 
         private async void button1_Click(object sender, EventArgs e)
