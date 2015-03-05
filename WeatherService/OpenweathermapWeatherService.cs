@@ -23,14 +23,13 @@ namespace WeatherService
 
     public class OpenweathermapWeatherService
     {
-        public async Task<Weather> GetWeatherAsync()
+        public async Task<Weather> GetWeatherAsync(string location_)
         {
             Weather weather = null;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://api.openweathermap.org/data/2.5/");
 
-                var location_ = "Seattle,WA";
                 var response = await client.GetAsync(string.Format("weather/?q={0}&mode=xml", location_));
                 if (response.IsSuccessStatusCode)
                 {
