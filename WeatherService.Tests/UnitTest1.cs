@@ -4,15 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace WeatherService.Tests
 {
-    [TestClass]
-    public class OpenweathermapWeatherServiceTests
+    public abstract class WeatherServiceTests
     {
-        private readonly OpenweathermapWeatherService _subject = new OpenweathermapWeatherService();
-
-        public OpenweathermapWeatherService Subject
-        {
-            get { return _subject; }
-        }
+        public abstract OpenweathermapWeatherService Subject { get; }
 
         [TestMethod]
         public async Task TemperatureIsInExpectedRange()
@@ -20,6 +14,17 @@ namespace WeatherService.Tests
             var result = await Subject.GetWeatherAsync("Seattle, WA");
             // Roughly the hottest and coldest ever recorded, plus a margin
             Assert.IsTrue(result.Temperature > 150 && result.Temperature < 350);
+        }
+    }
+
+    [TestClass]
+    public class OpenweathermapWeatherServiceTests : WeatherServiceTests
+    {
+        private readonly OpenweathermapWeatherService _subject = new OpenweathermapWeatherService();
+
+        public override OpenweathermapWeatherService Subject
+        {
+            get { return _subject; }
         }
     }
 }
