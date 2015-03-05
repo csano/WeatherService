@@ -13,8 +13,8 @@ namespace WeatherService.UI
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            var apiProxy = new OpenweathermapWeatherService();
-            var weather = await apiProxy.GetWeatherAsync("Seattle,WA");
+            var weatherService = new OpenweathermapWeatherService();
+            var weather = await weatherService.GetWeatherAsync("Seattle,WA");
 
             temperature.Text = weather.Temperature.ToString(CultureInfo.InvariantCulture);
             location.Text = weather.Location.City;
