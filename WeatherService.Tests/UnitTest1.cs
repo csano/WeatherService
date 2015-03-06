@@ -41,7 +41,7 @@ namespace WeatherService.Tests
 
     class WeatherServiceSimulator : IWeatherService
     {
-        public async Task<Weather> GetWeatherAsync(string location_)
+        public async Task<Weather> GetWeatherAsync(string query)
         {
             return new Weather(new Location()) { Temperature = 300 };
         }

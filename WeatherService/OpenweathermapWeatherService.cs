@@ -23,19 +23,19 @@ namespace WeatherService
 
     public interface IWeatherService
     {
-        Task<Weather> GetWeatherAsync(string location_);
+        Task<Weather> GetWeatherAsync(string query);
     }
 
     public class OpenweathermapWeatherService : IWeatherService
     {
-        public async Task<Weather> GetWeatherAsync(string location_)
+        public async Task<Weather> GetWeatherAsync(string query)
         {
             Weather weather = null;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://api.openweathermap.org/data/2.5/");
 
-                var response = await client.GetAsync(string.Format("weather/?q={0}&mode=xml", location_));
+                var response = await client.GetAsync(string.Format("weather/?q={0}&mode=xml", query));
                 if (response.IsSuccessStatusCode)
                 {
                    var output = await response.Content.ReadAsStringAsync();
