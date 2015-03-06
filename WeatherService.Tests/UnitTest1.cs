@@ -20,7 +20,7 @@ namespace WeatherService.Tests
     [TestClass]
     public class OpenweathermapWeatherServiceTests : WeatherServiceTests
     {
-        private readonly IWeatherService _subject = new OpenweathermapWeatherService();
+        private readonly IWeatherService _subject = new OpenWeatherMapWeatherService();
 
         public override IWeatherService Subject
         {

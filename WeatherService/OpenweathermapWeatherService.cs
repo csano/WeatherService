@@ -26,7 +26,7 @@ namespace WeatherService
         Task<Weather> GetWeatherAsync(string query);
     }
 
-    public class OpenweathermapWeatherService : IWeatherService
+    public class OpenWeatherMapWeatherService : IWeatherService
     {
         public async Task<Weather> GetWeatherAsync(string query)
         {
