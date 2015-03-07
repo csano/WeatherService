@@ -26,6 +26,43 @@ namespace WeatherService
         Task<Weather> GetWeatherAsync(string query);
     }
 
+    // class that represents resource at 
+    // http://api.openweathermap.org/data/2.5/weather?q=London&mode=xml
+    public class WeatherResource
+    {
+        private readonly IWeatherService weatherService;
+        public WeatherResource(IWeatherService weatherService)
+        {
+            this.weatherService = weatherService;
+        }
+
+        public Weather CurrentForLocation(string location)
+        {
+            // modify weatherService.GetWeatherAsync naming to reflect that it just handles requests/returns a response
+            // GetWeatherAsync returns XML data as a string
+            // parse XML via XDocument.Parse
+            // create Weather object/return it
+            return null;
+        }
+    }
+
+    // class that represents resource at 
+    // http://api.openweathermap.org/data/2.5/forecast/daily?q=London&mode=xml&units=metric&cnt=7
+    public class ForecastResource // can refactor to base resource
+    {
+        private readonly IWeatherService weatherService;
+        public ForecastResource(IWeatherService weatherService)
+        {
+            this.weatherService = weatherService;
+        }
+
+        // object for now, need to come up w/DTO
+        public object ForecastForLocation(string location, int numberOfDays)
+        {
+            return null;
+        }
+    }
+
     public class OpenWeatherMapWeatherService : IWeatherService
     {
         public async Task<Weather> GetWeatherAsync(string query)
