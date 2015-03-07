@@ -14,7 +14,7 @@ namespace WpfApplication1
 
         public static MainWindow CreateView()
         {
-            var model = new WeatherModel(new OpenweathermapWeatherService());
+            var model = new WeatherModel(new OpenWeatherMapWeatherService());
             var view = new MainWindow {DataContext = model.ViewModel};
             return view;
         }
