@@ -4,6 +4,16 @@
         Title="MainWindow" Height="350" Width="525">
     <StackPanel>
         <Button Command="{Binding GetWeatherCommand}">Get Weather</Button>
+        <Label>
+            <TabControl Height="100" Width="100">
+                <TabItem Header="TabItem">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Header="TabItem">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+            </TabControl>
+        </Label>
         <Label>Temperature:</Label>
         <Label Content="{Binding Temperature}"></Label>
         <Label>Location:</Label>
