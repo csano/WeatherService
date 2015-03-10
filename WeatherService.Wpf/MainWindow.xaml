@@ -6,16 +6,16 @@
         <Button Command="{Binding GetWeatherCommand}">Get Weather</Button>
         <Label>
             <TabControl Height="400" Width="509">
-                <TabItem Header="TabItem" Height="22" Margin="-2,-2,-1.667,0" VerticalAlignment="Bottom">
+                <TabItem Header="Current" Height="22" Margin="-2,-2,-1.667,0" VerticalAlignment="Bottom">
                     <Grid Background="#FFE5E5E5" Margin="0,0,0.333,-179">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="75*"/>
                             <ColumnDefinition Width="428*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Content="Temperature:" Grid.ColumnSpan="2" />
+                        <Label Content="Temperature:" Grid.ColumnSpan="2" Margin="10, 0, -20, 0"  />
                         <Label Content="{Binding Temperature}" Margin="10, 20, -20, 0" Grid.ColumnSpan="2"/>
-                        <Label Content="Location:" Margin="10,36,-26,10" Grid.ColumnSpan="2"/>
-                        <Label Content="{Binding Location.City}" Margin="10,62,-26,0" Grid.ColumnSpan="2"/>
+                        <Label Content="Location:" Margin="10,36,-20,10" Grid.ColumnSpan="2"/>
+                        <Label Content="{Binding Location.City}" Margin="10,20,-20,0" Grid.ColumnSpan="2"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="7 day">
