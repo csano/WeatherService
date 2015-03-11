@@ -39,6 +39,19 @@ namespace WeatherService.Tests
                 currentDate = currentDate.AddDays(1);
             }
         }
+
+        [TestMethod]
+        public async Task QueryingForForecastCapturesHighAndLowTemperaturesForNextFiveDays()
+        {
+            var result = await Subject.GetForecast("Seattle, WA", 5);
+
+            result.Data.Count.ShouldBeEquivalentTo(5);
+            foreach (var data in result.Data)
+            {
+                data.Temperature.High.Should().BeGreaterThan(0);
+                data.Temperature.Low.Should().BeGreaterThan(0);
+            }
+        }
     }
 
     [TestClass]
@@ -72,15 +85,16 @@ namespace WeatherService.Tests
 
         public async Task<Forecast> GetForecast(string query, int days)
         {
+            var temperature = new Temperature { High = 300, Low = 225 };
             return new Forecast(new Location { City = "Seattle" })
             {
                 Data = new List<ForecastData>
                 {
-                    new ForecastData {Date = DateTime.Now.Date},
-                    new ForecastData {Date = DateTime.Now.Date.AddDays(1)},
-                    new ForecastData {Date = DateTime.Now.Date.AddDays(2)},
-                    new ForecastData {Date = DateTime.Now.Date.AddDays(3)},
-                    new ForecastData {Date = DateTime.Now.Date.AddDays(4)}
+                    new ForecastData { Date = DateTime.Now.Date, Temperature = temperature },
+                    new ForecastData { Date = DateTime.Now.Date.AddDays(1), Temperature = temperature },
+                    new ForecastData { Date = DateTime.Now.Date.AddDays(2), Temperature = temperature },
+                    new ForecastData { Date = DateTime.Now.Date.AddDays(3), Temperature = temperature },
+                    new ForecastData { Date = DateTime.Now.Date.AddDays(4), Temperature = temperature }
                 }
             };
         }

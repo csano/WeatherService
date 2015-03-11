@@ -48,9 +48,16 @@ namespace WeatherService
                forecast = new Forecast(location);
                foreach (var timeElement in doc.XPathSelectElements("/weatherdata/forecast/time"))
                {
-                   forecast.Data.Add(new ForecastData { Date = DateTime.Parse(timeElement.Attribute("day").Value) });
+                   forecast.Data.Add(new ForecastData
+                   {
+                       Date = DateTime.Parse(timeElement.Attribute("day").Value),
+                       Temperature = new Temperature
+                       {
+                           High = Double.Parse(timeElement.XPathSelectElement("temperature").Attribute("max").Value),
+                           Low = Double.Parse(timeElement.XPathSelectElement("temperature").Attribute("min").Value)
+                       }
+                   });
                }
-
            }
 
            return forecast;
@@ -82,6 +89,7 @@ namespace WeatherService
     public class ForecastData
     {
         public DateTime Date { get; set; }
+        public Temperature Temperature { get; set; }
     }
 
     public class Forecast
@@ -94,5 +102,11 @@ namespace WeatherService
             Location = location;
             Data = new List<ForecastData>();
         }
+    }
+
+    public class Temperature
+    {
+        public double High { get; set; }
+        public double Low { get; set; }
     }
 }
