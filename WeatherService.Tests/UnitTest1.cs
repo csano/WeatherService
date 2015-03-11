@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace WeatherService.Tests
@@ -14,6 +14,14 @@ namespace WeatherService.Tests
             var result = await Subject.GetWeatherAsync("Seattle, WA");
             // Roughly the hottest and coldest ever recorded, plus a margin
             Assert.IsTrue(result.Temperature > 150 && result.Temperature < 350);
+        }
+
+        [TestMethod]
+        public async Task QueryingForForecastHasExpectedLocation()
+        {
+            var result = await Subject.GetForecast("Seattle, WA", 7);
+
+            result.Location.City.ShouldBeEquivalentTo("Seattle");
         }
     }
 
@@ -44,6 +52,11 @@ namespace WeatherService.Tests
         public async Task<Weather> GetWeatherAsync(string query)
         {
             return new Weather(new Location()) { Temperature = 300 };
+        }
+
+        public async Task<Forecast> GetForecast(string query, int days)
+        {
+            return new Forecast(new Location { City = "Seattle" });
         }
     }
 }

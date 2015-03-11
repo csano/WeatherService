@@ -20,6 +20,13 @@ namespace WpfApplication1
             };
         }
 
+        public async Task GetSevenDayForecast()
+        {
+            //var weather = await _weatherService.GetWeatherAsync("Seattle, WA");
+            //ViewModel.Location = weather.Location;
+            //ViewModel.Temperature = weather.Temperature;
+        }
+
         public async Task GetWeather()
         {
             var weather = await _weatherService.GetWeatherAsync("Seattle, WA");
