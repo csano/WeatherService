@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,6 +24,20 @@ namespace WeatherService.Tests
             var result = await Subject.GetForecast("Seattle, WA", 7);
 
             result.Location.City.ShouldBeEquivalentTo("Seattle");
+        }
+
+        [TestMethod]
+        public async Task QueryingForForecastCapturesDatesForNextFiveDays()
+        {
+            var result = await Subject.GetForecast("Seattle, WA", 5);
+
+            result.Data.Count.ShouldBeEquivalentTo(5);
+            var currentDate = DateTime.Now.Date;
+            foreach (var data in result.Data)
+            {
+                data.Date.ShouldBeEquivalentTo(currentDate);
+                currentDate = currentDate.AddDays(1);
+            }
         }
     }
 
@@ -56,7 +72,17 @@ namespace WeatherService.Tests
 
         public async Task<Forecast> GetForecast(string query, int days)
         {
-            return new Forecast(new Location { City = "Seattle" });
+            return new Forecast(new Location { City = "Seattle" })
+            {
+                Data = new List<ForecastData>
+                {
+                    new ForecastData {Date = DateTime.Now.Date},
+                    new ForecastData {Date = DateTime.Now.Date.AddDays(1)},
+                    new ForecastData {Date = DateTime.Now.Date.AddDays(2)},
+                    new ForecastData {Date = DateTime.Now.Date.AddDays(3)},
+                    new ForecastData {Date = DateTime.Now.Date.AddDays(4)}
+                }
+            };
         }
     }
 }

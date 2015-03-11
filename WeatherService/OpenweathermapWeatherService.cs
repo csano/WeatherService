@@ -46,6 +46,11 @@ namespace WeatherService
                var city = doc.XPathSelectElement("/weatherdata/location/name").Value;
                var location = new Location { City = city };
                forecast = new Forecast(location);
+               foreach (var timeElement in doc.XPathSelectElements("/weatherdata/forecast/time"))
+               {
+                   forecast.Data.Add(new ForecastData { Date = DateTime.Parse(timeElement.Attribute("day").Value) });
+               }
+
            }
 
            return forecast;
@@ -74,13 +79,20 @@ namespace WeatherService
         }
     }
 
+    public class ForecastData
+    {
+        public DateTime Date { get; set; }
+    }
+
     public class Forecast
     {
         public Location Location { get; private set; }
+        public List<ForecastData> Data { get; set; } 
 
         public Forecast(Location location)
         {
             Location = location;
+            Data = new List<ForecastData>();
         }
     }
 }
