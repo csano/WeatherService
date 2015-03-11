@@ -15,7 +15,7 @@
                         <Label Content="Temperature:" Grid.ColumnSpan="2" Margin="10, 0, -20, 0"  />
                         <Label Content="{Binding Temperature}" Margin="10, 20, -20, 0" Grid.ColumnSpan="2"/>
                         <Label Content="Location:" Margin="10,36,-20,10" Grid.ColumnSpan="2"/>
-                        <Label Content="{Binding Location.City}" Margin="10,20,-20,0" Grid.ColumnSpan="2"/>
+                        <Label Content="{Binding Location.City}" Margin="10,56,-20,0" Grid.ColumnSpan="2"/>
                     </Grid>
                 </TabItem>
                 <TabItem Header="7 day">
@@ -25,8 +25,21 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="100" />
                         </Grid.RowDefinitions>
+                        <Grid Grid.Column="0">
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="{Binding Path=Icon}" />
+                                <Label Content="{Binding Day}" />
+                            </StackPanel>
+                        </Grid>
+                        <Border BorderBrush="Black" BorderThickness="0.5" Grid.Column="1">
+                        </Border>
+                        <Grid Grid.Column="1">
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="{Binding Temperature}" />
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </TabItem>
             </TabControl>
