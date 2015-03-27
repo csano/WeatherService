@@ -19,7 +19,7 @@ namespace WeatherService
             Location = location; 
         }
         public Location Location { get; private set; }
-        public double Temperature { get; set; } 
+        public double Temperature { get; set; }
     }
 
     public interface IWeatherService
@@ -55,7 +55,8 @@ namespace WeatherService
                        {
                            High = Double.Parse(timeElement.XPathSelectElement("temperature").Attribute("max").Value),
                            Low = Double.Parse(timeElement.XPathSelectElement("temperature").Attribute("min").Value)
-                       }
+                       },
+                       Icon =  timeElement.XPathSelectElement("symbol").Attribute("var").Value
                    });
                }
            }
@@ -90,6 +91,7 @@ namespace WeatherService
     {
         public DateTime Date { get; set; }
         public Temperature Temperature { get; set; }
+        public string Icon { get; set; }
     }
 
     public class Forecast

@@ -52,6 +52,16 @@ namespace WeatherService.Tests
                 data.Temperature.Low.Should().BeGreaterThan(0);
             }
         }
+
+        [TestMethod]
+        public async Task QueryingForForecastCapturesIcon()
+        {
+            var result = await Subject.GetForecast("Seattle, WA", 1);
+
+            result.Data.Count.ShouldBeEquivalentTo(1);
+            result.Data[0].Icon.Should().NotBeEmpty();
+        }
+
     }
 
     [TestClass]
@@ -86,17 +96,19 @@ namespace WeatherService.Tests
         public async Task<Forecast> GetForecast(string query, int days)
         {
             var temperature = new Temperature { High = 300, Low = 225 };
-            return new Forecast(new Location { City = "Seattle" })
+            var forecast = new Forecast(new Location {City = "Seattle"});
             {
-                Data = new List<ForecastData>
+                for (var day = 0; day < days; day++)
                 {
-                    new ForecastData { Date = DateTime.Now.Date, Temperature = temperature },
-                    new ForecastData { Date = DateTime.Now.Date.AddDays(1), Temperature = temperature },
-                    new ForecastData { Date = DateTime.Now.Date.AddDays(2), Temperature = temperature },
-                    new ForecastData { Date = DateTime.Now.Date.AddDays(3), Temperature = temperature },
-                    new ForecastData { Date = DateTime.Now.Date.AddDays(4), Temperature = temperature }
+                    forecast.Data.Add(new ForecastData()
+                    {
+                        Date = DateTime.Now.Date.AddDays(day),
+                        Temperature = temperature,
+                        Icon = "icon"
+                    });
                 }
-            };
+            }
+            return forecast;
         }
     }
 }
